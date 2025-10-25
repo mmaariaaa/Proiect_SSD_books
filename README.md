@@ -1,11 +1,11 @@
 # Proiect_SSD_books
-# 📚 Proiect_SSD_Books
+# Proiect_SSD_Books
 
 ### A Web Application for Tracking, Sharing, and Reviewing Books & Movies
 
 ---
 
-## 🧩 Project Description
+##  Project Description
 
 **Proiect_SSD_Books** is a web application that allows users to search for **books and movies**, add them to their personal **watchlist or reading list**, **share progress**, and **write reviews**.  
 The platform is designed to encourage discovery and engagement through user interaction and progress tracking.
@@ -20,7 +20,7 @@ Users can:
 
 ---
 
-## 👥 Team Members
+##  Team Members
 
 | Name | Role |
 |------|------|
@@ -30,7 +30,7 @@ Users can:
 
 ---
 
-## 🧠 Actors in the System
+## Actors in the System
 
 | Actor | Description |
 |--------|--------------|
@@ -40,7 +40,7 @@ Users can:
 
 ---
 
-## 🎯 Use Cases
+##  Use Cases
 
 Below are the initial **sea-level use cases** for the application (more will be added as the project evolves):
 
