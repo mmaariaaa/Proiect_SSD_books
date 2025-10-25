@@ -5,6 +5,7 @@ Web application in which the users can search for books or movies to their watch
 # Use cases:
 ***Use case 1 :***
 Primary Actor:User
+
 Goal:Find movies/books 
 
 Interacting with the System:
@@ -17,6 +18,7 @@ Interacting with the System:
 
 ***Use case 2 :***
 Primary Actor: User
+
 Goal: Inspect full details of a selected title.
 
 Interacting with the System:
