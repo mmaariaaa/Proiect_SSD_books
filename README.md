@@ -22,21 +22,23 @@ Users can:
 
 ##  Team Members
 
-| Name | Role |
-|------|------|
-| Student 1 | Authentication & User Profiles |
-| Student 2 | Search & API Integration |
-| Student 3 | Reviews & Progress Tracking |
+
+
+ Student 1  Authentication & User Profiles 
+ 
+ Student 2  Search & API Integration 
+ 
+ Student 3  Reviews & Progress Tracking 
 
 ---
 
 ## Actors in the System
 
-| Actor | Description |
-|--------|--------------|
-| **User** | Can register, log in, search for items, manage lists, and review content. |
-| **System (App)** | Handles user data, API requests (OMDb / Google Books), stores reviews and progress. |
-| **External APIs** | OMDb API and Google Books API provide data for movies and books. |
+
+
+ **User**  Can register, log in, search for items, manage lists, and review content. 
+ **System (App)**  Handles user data, API requests (OMDb / Google Books), stores reviews and progress. 
+ **External APIs**  OMDb API and Google Books API provide data for movies and books. 
 
 ---
 
