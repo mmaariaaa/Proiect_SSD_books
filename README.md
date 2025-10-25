@@ -1,9 +1,8 @@
 # Proiect_SSD_books
-# Proiect_SSD_Books
 
 ### A Web Application for Tracking, Sharing, and Reviewing Books & Movies
 
----
+
 
 ##  Project Description
 
