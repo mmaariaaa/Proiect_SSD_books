@@ -6,16 +6,15 @@
 
 ##  Project Description
 
-**Proiect_SSD_Books** is a web application that allows users to search for **books and movies**, add them to their personal **watchlist or reading list**, **share progress**, and **write reviews**.  
-The platform is designed to encourage discovery and engagement through user interaction and progress tracking.
+**Proiect_SSD_Books** is a collaborative web application that allows users to:
+- Add **books** and **movies** to their personal library
+- Keep **track of their progress** (pages read / movies watched)
+- **Share and review** titles with others
+- **Upload images** (cover, poster, or user profile)
+- **Receive notifications/emails** when important events happen (e.g., registration)
 
-Users can:
-- Search for movies (via **OMDb API**) and books (via **Google Books API**)
-- View detailed information for each item
-- Add items to a personal list (to-watch / to-read)
-- Track progress (e.g., pages read, movies watched)
-- Share reviews and ratings
-- Explore recommendations from other users
+All data is securely stored and synchronized in **real time** using **Firebase Cloud Firestore**, allowing users to see updates instantly without refreshing the page.
+
 
 ---
 
