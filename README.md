@@ -10,7 +10,7 @@ Goal:Find movies/books
 
 Interacting with the System:
 
-1.User enters query and submits.
+1.User enters title and submits.
 
 2.System calls OMDb/Google Books.
 
