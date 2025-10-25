@@ -15,3 +15,13 @@ Interacting with the System:
 
 3.System shows paginated results with title, year, cover.
 
+***Use case 2 :***
+Primary Actor: User
+Goal: Inspect full details of a selected title.
+
+Interacting with the System:
+
+1.The user clicks on a movie or book from the list.
+
+2.The app shows details such as the title, description, author/director, year, and rating.
+
