@@ -11,7 +11,7 @@
 - Keep **track of their progress** (pages read / movies watched)
 - **Share and review** titles with others
 - **Upload images** (cover, poster, or user profile)
-- **Receive notifications/emails** when important events happen (e.g., registration)
+- **Receive notifications/emails** when important events happen
 
 All data is securely stored and synchronized in **real time** using **Firebase Cloud Firestore**, allowing users to see updates instantly without refreshing the page.
 
