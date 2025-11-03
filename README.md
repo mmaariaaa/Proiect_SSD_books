@@ -21,9 +21,9 @@ All data is securely stored and synchronized in **real time** using **Firebase C
 ##  Team Members
 
 
- Student 1  Authentication & User Profiles 
- Student 2  Book/Movie CRUD & Progress Tracking 
- Student 3  Reviews & Real-Time Features 
+Oancea Maria   Authentication & User Profiles 
+Ioja Cristina  Book/Movie CRUD & Progress Tracking 
+
 
 ---
 
