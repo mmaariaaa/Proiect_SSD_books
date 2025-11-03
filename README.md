@@ -16,14 +16,6 @@
 
 All data is securely stored and synchronized in **real time** using **Firebase Cloud Firestore**, allowing users to see updates instantly without refreshing the page.
 
----
-
-##  Team Members
-
-
-Oancea Maria   Authentication & User Profiles ,
-Ioja Cristina  Book/Movie Create,Read,Update,Delete & Progress Tracking 
-
 
 ---
 
