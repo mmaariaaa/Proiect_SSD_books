@@ -30,7 +30,7 @@ Ioja Cristina  Book/Movie Create,Read,Update,Delete & Progress Tracking
 ##  Actors in the System
 
  **User**  A registered person who can log in, manage their books/movies, track progress, and write reviews. 
- **System **  Manages data storage, authentication, image uploads, and real-time synchronization. 
+ **System**  Manages data storage, authentication, image uploads, and real-time synchronization. 
  **Email Service (Firebase Functions)**  Sends confirmation or notification emails after events such as registration. 
 
 ---
