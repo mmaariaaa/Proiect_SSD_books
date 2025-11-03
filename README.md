@@ -21,7 +21,7 @@ All data is securely stored and synchronized in **real time** using **Firebase C
 ##  Team Members
 
 
-Oancea Maria   Authentication & User Profiles 
+Oancea Maria   Authentication & User Profiles ,
 Ioja Cristina  Book/Movie CRUD & Progress Tracking 
 
 
