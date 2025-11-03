@@ -22,7 +22,7 @@ All data is securely stored and synchronized in **real time** using **Firebase C
 
 
 Oancea Maria   Authentication & User Profiles ,
-Ioja Cristina  Book/Movie CRUD & Progress Tracking 
+Ioja Cristina  Book/Movie Create,Read,Update,Delete & Progress Tracking 
 
 
 ---
