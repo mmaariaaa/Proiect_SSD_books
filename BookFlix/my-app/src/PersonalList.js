@@ -1,6 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { db } from "./firebase";
-import { collection, getDocs, query, where, doc, getDoc } from "firebase/firestore";
+import {
+    collection,
+    getDocs,
+    query,
+    where,
+    doc,
+    getDoc,
+} from "firebase/firestore";
 import { addToPersonalList } from "./addToPersonalList";
 
 function PersonalList() {
@@ -8,21 +15,58 @@ function PersonalList() {
     const [results, setResults] = useState([]);
     const [myList, setMyList] = useState([]);
 
+    // helper: normalizează o cheie unică pe baza datelor (dedup unificat)
+    const makeKeyFromData = (data) => {
+        const title = (data?.title || "").toLowerCase().trim();
+        const author = (data?.author || "").toLowerCase().trim();
+        const year = String(data?.year || "").trim();
+        return `sig:${title}|${author}|${year}`;
+    };
+
+    // ✅ Încarcă lista personală din Firestore + deduplicare (inclusiv vechi+nou)
     const loadMyList = async () => {
         try {
             const snapshot = await getDocs(collection(db, "personalList"));
+
             const items = [];
+            const seen = new Set(); // dedup unificat
 
             for (const entry of snapshot.docs) {
-                const itemId = entry.data().itemId;
+                const saved = entry.data().itemId;
 
-                const itemRef = doc(db, "item", itemId);
-                const itemSnap = await getDoc(itemRef);
+                // ✅ CAZ 1: intrări vechi/stricate: itemId e OBIECT (title/author/etc.)
+                if (saved && typeof saved === "object") {
+                    const key = makeKeyFromData(saved);
 
-                if (itemSnap.exists()) {
+                    if (seen.has(key)) continue;
+                    seen.add(key);
+
+                    items.push({
+                        id: key, // id local (unic)
+                        ...saved,
+                    });
+
+                    continue;
+                }
+
+                // ✅ CAZ 2: intrări corecte: itemId e STRING (id din colecția "item")
+                if (typeof saved === "string" && saved.trim()) {
+                    const itemDocId = saved.trim();
+
+                    const itemRef = doc(db, "item", itemDocId);
+                    const itemSnap = await getDoc(itemRef);
+
+                    if (!itemSnap.exists()) continue;
+
+                    const data = itemSnap.data();
+                    const key = makeKeyFromData(data); // ✅ aceeași cheie ca la obiect
+
+                    if (seen.has(key)) continue;
+                    seen.add(key);
+
                     items.push({
                         id: itemSnap.id,
-                        ...itemSnap.data()
+                        ...data,
                     });
                 }
             }
@@ -36,27 +80,42 @@ function PersonalList() {
     useEffect(() => {
         loadMyList();
     }, []);
+
+    // ✅ Căutare în baza de date (colecția "item")
     const handleSearch = async () => {
-        if (!searchInput.trim()) return;
+        const qText = searchInput.trim();
+        if (!qText) return;
 
         try {
+            // prefix-search pe title
             const q = query(
                 collection(db, "item"),
-                where("title", ">=", searchInput),
-                where("title", "<=", searchInput + "\uf8ff")
+                where("title", ">=", qText),
+                where("title", "<=", qText + "\uf8ff")
             );
 
             const snapshot = await getDocs(q);
-            const found = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+            const found = snapshot.docs.map((d) => ({ id: d.id, ...d.data() }));
             setResults(found);
         } catch (err) {
             console.error("Error searching:", err);
         }
     };
 
+    // ✅ Add din rezultate în personalList (salvează DOAR id-ul)
+    const handleAddFromSearch = async (item) => {
+        try {
+            await addToPersonalList(item.id);
+            await loadMyList(); // refresh listă
+        } catch (err) {
+            console.error(err);
+        }
+    };
+
     return (
         <div style={{ padding: 20 }}>
             <h2>My Personal List</h2>
+
             <div style={{ display: "flex", gap: "10px", marginBottom: "20px" }}>
                 <input
                     type="text"
@@ -67,68 +126,63 @@ function PersonalList() {
                         padding: "8px",
                         width: "250px",
                         border: "1px solid #ccc",
-                        borderRadius: "6px"
+                        borderRadius: "6px",
                     }}
                 />
                 <button
                     onClick={handleSearch}
                     style={{
-                        padding: "8px 15px",
-                        backgroundColor: "#1976d2",
-                        color: "white",
+                        padding: "8px 14px",
                         border: "none",
                         borderRadius: "6px",
-                        cursor: "pointer"
+                        backgroundColor: "#1976d2",
+                        color: "white",
+                        cursor: "pointer",
                     }}
                 >
                     Search
                 </button>
             </div>
+
             {results.length > 0 && (
-                <div>
-                    <h3>Search Results:</h3>
+                <div style={{ marginBottom: 20 }}>
+                    <h3>Search Results</h3>
 
                     {results.map((item) => (
                         <div
                             key={item.id}
                             style={{
-                                border: "1px solid #ddd",
-                                padding: "15px",
-                                marginBottom: "12px",
-                                borderRadius: "8px",
                                 display: "flex",
                                 alignItems: "center",
-                                gap: "15px"
+                                gap: 12,
+                                padding: 10,
+                                border: "1px solid #ddd",
+                                borderRadius: 10,
+                                marginBottom: 10,
                             }}
                         >
-                            <img src={item.coverUrl} alt={item.title} width={80} />
+                            <img
+                                src={item.coverUrl || "/placeholder.png"}
+                                alt={item.title}
+                                width={60}
+                                height={90}
+                                style={{ objectFit: "cover", borderRadius: 6 }}
+                                onError={(e) => (e.currentTarget.src = "/placeholder.png")}
+                            />
 
-                            <div style={{ flexGrow: 1 }}>
-                                <h3>{item.title}</h3>
-                                <p>{item.author}</p>
+                            <div style={{ flex: 1 }}>
+                                <div style={{ fontWeight: 700 }}>{item.title}</div>
+                                <div>{item.author}</div>
+                                {item.year && <div>{item.year}</div>}
                             </div>
 
-                            <button
-                                onClick={async () => {
-                                    await addToPersonalList(item.id);
-                                    loadMyList(); // reload list
-                                }}
-                                style={{
-                                    padding: "6px 12px",
-                                    backgroundColor: "#ff4081",
-                                    color: "white",
-                                    border: "none",
-                                    borderRadius: "6px",
-                                    cursor: "pointer"
-                                }}
-                            >
-                                Add to My List
-                            </button>
+                            <button onClick={() => handleAddFromSearch(item)}>Add</button>
                         </div>
                     ))}
                 </div>
             )}
-            <h3 style={{ marginTop: "30px" }}>Your Saved Books / Movies</h3>
+
+            <h3>Your Saved Books / Movies</h3>
 
             {myList.length === 0 ? (
                 <p>You haven't added anything yet.</p>
@@ -137,20 +191,29 @@ function PersonalList() {
                     <div
                         key={item.id}
                         style={{
-                            border: "1px solid #ccc",
-                            padding: "15px",
-                            marginBottom: "12px",
-                            borderRadius: "8px",
                             display: "flex",
                             alignItems: "center",
-                            gap: "15px"
+                            gap: 12,
+                            padding: 10,
+                            border: "1px solid #ddd",
+                            borderRadius: 10,
+                            marginBottom: 10,
                         }}
                     >
-                        <img src={item.coverUrl} alt={item.title} width={80} />
+                        <img
+                            src={item.coverUrl || "/placeholder.png"}
+                            alt={item.title}
+                            width={80}
+                            height={120}
+                            style={{ objectFit: "cover", borderRadius: 6 }}
+                            onError={(e) => (e.currentTarget.src = "/placeholder.png")}
+                        />
 
                         <div>
-                            <h3>{item.title}</h3>
-                            <p>{item.author}</p>
+                            <h3 style={{ margin: 0 }}>{item.title}</h3>
+                            <p style={{ margin: 0 }}>{item.author}</p>
+                            {item.year && <p style={{ margin: 0 }}>{item.year}</p>}
+                            {item.type && <p style={{ margin: 0 }}>Type: {item.type}</p>}
                         </div>
                     </div>
                 ))
