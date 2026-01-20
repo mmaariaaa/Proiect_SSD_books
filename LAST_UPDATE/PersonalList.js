@@ -147,7 +147,7 @@ function PersonalList() {
         >
             <h2 style={{ marginBottom: 10 }}>My Personal List</h2>
 
-            <h3 style={{ marginTop: 10 }}>Your Saved Books / Movies</h3>
+            <h3 style={{ marginTop: 10 }}>Your Saved Books</h3>
 
             <div style={{ maxWidth: 600, width: "100%", marginTop: 10 }}>
                 {myList.length === 0 ? (
@@ -202,5 +202,6 @@ function PersonalList() {
         </div>
     );
 }
+
 
 export default PersonalList;
