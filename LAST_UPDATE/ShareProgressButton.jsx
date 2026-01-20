@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "../firebase";
-import { shareProgress } from "../services/shareProgress";
+import { auth } from "../firebase"; // Schimbă în "./firebase" dacă e în același folder
+import { shareProgress } from "../services/shareProgress"; // adaptează calea dacă ai alt folder
 
 const ShareProgressButton = ({ item }) => {
     const [user, setUser] = useState(null);
@@ -13,19 +13,23 @@ const ShareProgressButton = ({ item }) => {
 
     const handleShare = async () => {
         if (!user) {
-            alert("You have to be logged in so you can share the progress !!!.");
+            alert("Trebuie să fii logat ca să poți da Share Progress.");
+            return;
+        }
+        if (!item?.id) {
+            alert("Nu există item selectat.");
             return;
         }
 
         await shareProgress({
             userId: user.uid,
             userName: user.displayName || user.email || "Anonymous",
-            itemId: item?.id || "unknown",
-            itemTitle: item?.title || "Unknown title",
-            progress: item?.progress || "Progress update"
+            itemId: item.id,
+            itemTitle: item.title || "Unknown title",
+            progress: item.progress || "Progress update",
         });
 
-        alert("Shared!");
+        alert("Progress shared!");
     };
 
     if (!user) return null;
