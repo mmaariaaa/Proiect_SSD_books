@@ -1,7 +1,13 @@
 import { db } from "./firebase";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 
-export const shareProgress = async ({ userId, userName, itemId, itemTitle, progress }) => {
+export const shareProgress = async ({
+                                        userId,
+                                        userName,
+                                        itemId,
+                                        itemTitle,
+                                        progress,
+                                    }) => {
     try {
         await addDoc(collection(db, "activityFeed"), {
             userId,
@@ -9,9 +15,10 @@ export const shareProgress = async ({ userId, userName, itemId, itemTitle, progr
             itemId,
             itemTitle,
             progress,
-            createdAt: serverTimestamp()
+            createdAt: serverTimestamp(),
         });
     } catch (err) {
         console.error("Error sharing progress:", err);
+        throw err;
     }
 };
