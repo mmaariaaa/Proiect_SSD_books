@@ -8,18 +8,18 @@ function Login() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  // Login cu email și parolă
+  
   const handleEmailLogin = async () => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
       alert("Logged in successfully!");
-      navigate("/"); // redirecționează către home page
+      navigate("/"); 
     } catch (err) {
       alert(err.message);
     }
   };
 
-  // Login cu Google
+  
   const handleGoogleLogin = async () => {
     try {
       await signInWithPopup(auth, googleProvider);
@@ -111,7 +111,7 @@ function Login() {
 
         <hr style={{ margin: "20px 0" }} />
 
-        {/* Google Login */}
+       
         <button
           onClick={handleGoogleLogin}
           style={{
