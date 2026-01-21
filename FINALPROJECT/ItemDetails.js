@@ -223,7 +223,7 @@ function ItemDetails() {
                         <b>Description:</b> {item.description}
                     </p>
 
-                    {/* Progress */}
+                   
                     <div style={{ marginTop: 20 }}>
                         <h3>Reading / Watching Progress</h3>
 
@@ -284,7 +284,7 @@ function ItemDetails() {
                         </div>
                     </div>
 
-                    {/* Reviews */}
+                   
                     <div style={{ marginTop: 20 }}>
                         <h3>Reviews</h3>
 
@@ -300,7 +300,7 @@ function ItemDetails() {
                             <p style={{ marginTop: 0 }}>No reviews yet.</p>
                         )}
 
-                        {/* Form review */}
+                       
                         <div
                             style={{
                                 backgroundColor: "rgba(255,255,255,0.08)",
@@ -351,7 +351,7 @@ function ItemDetails() {
                             </button>
                         </div>
 
-                        {/* List reviews */}
+                       
                         <div style={{ marginTop: 12, maxWidth: 520 }}>
                             {reviews.length === 0 ? null : (
                                 reviews.map((r) => (
