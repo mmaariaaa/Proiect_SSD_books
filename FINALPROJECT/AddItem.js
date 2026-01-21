@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { db } from "./firebase";
 import { collection, addDoc } from "firebase/firestore";
-import "./App.css"; // pentru animatie
+import "./App.css"; 
 
 function AddItem() {
   const [form, setForm] = useState({
@@ -91,7 +91,7 @@ return (
           Add New Item
         </h2>
 
-        {/* INPUT FIELDS */}
+        
         {["title","author","year","coverUrl"].map(field => (
           <input
             key={field}
@@ -114,7 +114,7 @@ return (
           />
         ))}
 
-        {/* DESCRIPTION */}
+       
         <textarea
           name="description"
           placeholder="Description"
@@ -136,7 +136,7 @@ return (
           onBlur={(e) => e.currentTarget.style.boxShadow = "none"}
         />
 
-        {/* TYPE */}
+       
         <select
           name="type"
           value={form.type}
@@ -155,7 +155,7 @@ return (
           <option value="movie">Movie</option>
         </select>
 
-        {/* SUBMIT BUTTON */}
+       
         <button
           onClick={handleSubmit}
           style={{
