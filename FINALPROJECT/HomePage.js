@@ -18,7 +18,7 @@ if (user) {
   console.log("No user logged in");
 }
 
-  // Load all items from Firestore
+  
   useEffect(() => {
     const fetchItems = async () => {
       try {
@@ -41,7 +41,7 @@ if (user) {
 
   return (
     <div style={{ position: "relative", minHeight: "100vh", overflow: "hidden" }}>
-      {/* VIDEO BACKGROUND */}
+      
       <video
         autoPlay
         loop
@@ -61,7 +61,7 @@ if (user) {
         Your browser does not support the video tag.
       </video>
 
-      {/* OVERLAY BLUR */}
+      
       <div
         style={{
           position: "absolute",
@@ -75,7 +75,7 @@ if (user) {
         }}
       />
 
-      {/* CONTENT */}
+      
       <div
         className="fadeSlide"
         style={{
@@ -87,7 +87,7 @@ if (user) {
           padding: 20,
         }}
       >
-        {/* HEADER */}
+       
         <h1
           style={{
             textAlign: "center",
@@ -101,7 +101,7 @@ if (user) {
           Welcome to BOOKFLIX
         </h1>
 
-        {/* SEARCH BAR */}
+       
         <div style={{ textAlign: "center", marginBottom: 20 }}>
           <input
             value={title}
@@ -141,7 +141,7 @@ if (user) {
           </button>
         </div>
 
-        {/* SEARCH RESULTS */}
+        
         <div style={{ width: "100%", maxWidth: 700, marginTop: 30 }}>
           {results.length === 0 && <p>No results found</p>}
           {results.map((item) => (
@@ -177,7 +177,7 @@ if (user) {
           ))}
         </div>
 
-        {/* ACTIVITY FEED */}
+        
         <div style={{ width: "100%", maxWidth: 700, marginTop: 40 }}>
           <ActivityFeed user={auth.currentUser} />
         </div>
