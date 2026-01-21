@@ -6,13 +6,11 @@ function ActivityFeed() {
   const [activities, setActivities] = useState([]);
 
   useEffect(() => {
-    // 🔹 Creăm query ordonat descrescător după data creării
     const q = query(
       collection(db, "activityFeed"),
       orderBy("createdAt", "desc")
     );
 
-    // 🔹 onSnapshot = live update
     const unsubscribe = onSnapshot(q, (snapshot) => {
       const feed = snapshot.docs.map((doc) => ({
         id: doc.id,
@@ -21,7 +19,6 @@ function ActivityFeed() {
       setActivities(feed);
     });
 
-    // 🔹 curățare la unmount
     return () => unsubscribe();
   }, []);
 
