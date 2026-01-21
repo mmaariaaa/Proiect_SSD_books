@@ -1,7 +1,7 @@
 import { db } from "./firebase.js";
 import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore.js";
 
-// Read ID from URL (item.html?id=xxxx)
+
 const params = new URLSearchParams(window.location.search);
 const itemId = params.get("id");
 
@@ -10,7 +10,7 @@ if (!itemId) {
     throw new Error("Missing ID");
 }
 
-// Load full details from Firestore
+
 async function loadDetails() {
     const ref = doc(db, "items", itemId);
     const snap = await getDoc(ref);
