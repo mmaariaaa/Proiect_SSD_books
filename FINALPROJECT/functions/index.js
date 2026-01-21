@@ -7,12 +7,12 @@ admin.initializeApp();
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: "youremail@gmail.com", // schimbă cu email-ul tău
-    pass: "yourpassword"          // schimbă cu parola sau app password
+    user: "youremail@gmail.com", 
+    pass: "yourpassword"          
   }
 });
 
-// Trigger pentru notificări când cineva postează în activityFeed
+
 exports.sendNotification = functions.firestore
   .document("activityFeed/{docId}")
   .onCreate(async (snap, context) => {
